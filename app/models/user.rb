@@ -3,6 +3,9 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   include BCrypt
 
+  has_many :products, dependent: :destroy
+  has_many :categories, dependent: :destroy
+
   def password
     @passwor ||= Password.new(password_hash)
   end
