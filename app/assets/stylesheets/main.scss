@@ -1,7 +1,13 @@
+#container{
+  height: 100%;
+}
+
 #navigation{
-  background-color: black;
+  width: 300px;
 }
 
 #content{
   background-color: yellow;
+  padding-left: 300px;
+  height: 100%;
 }
