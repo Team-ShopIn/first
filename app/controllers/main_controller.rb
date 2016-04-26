@@ -1,11 +1,11 @@
 class MainController < ApplicationController
 
   def home
-    
+
   end
 
-  def home_shopin
-
+  def sign_up
+    
   end
 
 end

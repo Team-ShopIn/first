@@ -23,15 +23,20 @@
       </div>
     </div>
     <li><a href="/" id="go_ShopIn">Shop In</a></li>
-    <li><a href="#" id="go_HowtoUse">How to Use</a></li>
+    <li><a href="/sign_up" id="go_HowtoUse">How to Use</a></li>
   </ul>
+
   <a href="#" data-activates="navigation" class="button-collapse" style="position:fixed;"><i class="material-icons">menu</i></a>
+
   <div id="content">
+
     <% if params[:page_title] == nil %>
       <%= render :layout => 'home_shopin', :locals => {:title => 'some title'} do %><% end %>
-    <% elsif params[:page_title] == "shopin" %>
-      <%= render :layout => 'home_shopin', :locals => {:title => 'some title'} do %><% end %>
+    <% elsif params[:page_title] == "sign_up" %>
+      <%= render :layout => 'home_signup', :locals => {:title => 'some title'} do %><% end %>
     <% end %>
+
   </div>
+
 </body>
 </html>
