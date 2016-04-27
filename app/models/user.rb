@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :categories, dependent: :destroy
 
   def password
-    @passwor ||= Password.new(password_hash)
+    @password ||= Password.new(password_hash)
   end
 
   def password=(new_password)
