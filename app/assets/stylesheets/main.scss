@@ -7,7 +7,25 @@
 }
 
 #content{
-  background-color: yellow;
   padding-left: 300px;
   height: 100%;
+}
+
+#content #home_shopin h1{
+  font-size: 200px;
+}
+
+#content #home_singup h1{
+  font-size: 100px;
+}
+
+#content #home_signup .done{
+  margin-top: 30px;
+  color: green;
+  visibility: hidden;
+}
+
+#content #home_signup #email.valid {
+     border-bottom: 1px solid red;
+     box-shadow: 0 1px 0 0 red;
 }
