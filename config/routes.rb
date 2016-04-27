@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   root 'main#home'
   get '/:page_title' => 'main#home'
+  post '/' => 'main#create'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
