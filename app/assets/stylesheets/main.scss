@@ -15,7 +15,7 @@
   font-size: 200px;
 }
 
-#content #home_singup h1{
+#content #home_signup h1{
   font-size: 100px;
 }
 
@@ -28,4 +28,32 @@
 #content #home_signup #email.valid {
      border-bottom: 1px solid red;
      box-shadow: 0 1px 0 0 red;
+}
+
+#url_Input {
+  width: 63%;
+  height: 38px;
+  border: 2px solid #ccc;
+  border-radius: 2px;
+  margin: 0 auto 0 22px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+#url_Input:focus {
+  border: 2px solid #555;
+}
+
+#url_Submit {
+  width: 20%;
+  height: 38px;
+  margin: -2px 0 0 0;
+}
+
+#url_Submit i {
+  font-size: 2.0em;
+  margin: 1px 0 0 -14px;
 }
