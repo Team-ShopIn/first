@@ -2,15 +2,13 @@
 $('.main.home').ready(function () {
   //Submit 버튼 클릭시
   $("#url_Submit").click(function(){
-    document.getElementById("url_Submit").disabled = true;
     parsing_url();
     $("#url_Input").val('');
   });
 
   //URL 엔터키 먹였을때.
-  $("#url_Submit").keydown(function(e){
+  $("#url_Input").keydown(function(e){
     if(e.keyCode == 13){
-      document.getElementById("url_Submit").disabled = true;
       parsing_url();
       $("#url_Input").val('');
     }
@@ -40,7 +38,6 @@ function submit_url(url){
     type:'POST',
     data:{'url':url},
     success:function(v){
-      document.getElementById("url_Submit").disabled = false;
       sweetAlert ({
         title: "상품이 등록되었습니다.",
         text: "해당 상품으로 이동하시겠습니까?",
