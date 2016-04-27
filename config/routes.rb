@@ -8,11 +8,13 @@ Rails.application.routes.draw do
   root 'main#home'
   get '/:page_title' => 'main#home'
 
-  post '/' => 'main#create'
-  
+  post '/cart/:id' => 'main#create'
+
   post '/signUp' => 'main#signUp'
   post '/login' => 'main#logIn'
   post '/logout' => 'main#logOut'
+
+  post '/getUserId' => 'user#getUserId'
 
 
   # Example of regular route:
