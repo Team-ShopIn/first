@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/:page_title' => 'main#home'
   post '/signUp' => 'main#signUp'
   post '/login' => 'main#logIn'
+  post '/logout' => 'main#logOut'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

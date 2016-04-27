@@ -6,23 +6,32 @@
 
   <ul id="navigation" class="side-nav fixed">
     <div id="nav_info">
+
       <div class="row" id="nav_info_login">
-        <form class="col s12"/>
-        <div class="row nav_info_login_center" style="margin-bottom : 0px;">
-          <div class="input-field col s12">
-            <input id="nav_info_id" type="text" class="validate">
-            <label for="nav_info_id">ID</label>
+        <% if !@current_user %>
+          <form class="col s12"/>
+          <div class="row nav_info_login_center" style="margin-bottom : 0px;">
+            <div class="input-field col s12">
+              <input id="nav_info_id" type="text" class="validate">
+              <label for="nav_info_id">ID</label>
+            </div>
           </div>
-        </div>
-        <div class="row nav_info_login_center">
-          <div class="input-field col s12">
-            <input id="nav_info_pw" type="password" class="validate">
-            <label for="nav_info_pw">PASSWORD</label>
+          <div class="row nav_info_login_center">
+            <div class="input-field col s12">
+              <input id="nav_info_pw" type="password" class="validate">
+              <label for="nav_info_pw">PASSWORD</label>
+            </div>
           </div>
-        </div>
+        <% else %>
+          <p style="margin:0px; font-size:20px;"><b><%= @current_user.nickname %></b>님 즐거운 쇼핑되세요<p>
+        <% end %>
       </div>
       <div id="nav_info_button">
-        <button class="waves-effect waves-light btn nav_info_signup_button" type="button" id="nav_info_login_button">로그인</button>
+        <% if !@current_user %>
+          <button class="waves-effect waves-light btn nav_info_signup_button" type="button" id="nav_info_login_button">로그인</button>
+        <% else %>
+          <button class="waves-effect waves-light btn nav_info_signup_button" type="button" id="nav_info_login_button">로그아웃</button>
+        <% end %>
         <button class="waves-effect waves-light btn nav_info_signup_button" type="button" id="nav_info_signup_button">회원가입</button>
       </div>
     </div>

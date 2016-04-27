@@ -5,6 +5,15 @@ $('.main.home').ready(function () {
   setStateAuto();
   $(".done").hide();
 
+  $('#nav_info_login_button').click(function(){
+    if($('#nav_info_login_button').text() == "로그인")
+      logInQuery();
+    else{
+      logOutQuery();
+      alert("까꿍");
+    }
+  });
+
   //화면이 작아졌을 때(모바일 등) 나오는 사이드메뉴 init 함수
   $('.button-collapse').sideNav({
       menuWidth: 300,
@@ -14,9 +23,6 @@ $('.main.home').ready(function () {
 
   // 메인화면 ( 샵인소개페이지 ) 일 때 실행하는 자바스크립트 코드
   if(state == 1){
-    $('#nav_info_login_button').click(function(){
-      logInQuery();
-    });
 
     $('#nav_info_signup_button').click(function(){
       $(location).attr('href','/sign_up');
@@ -158,10 +164,26 @@ function logInQuery(){
     type: "POST",
     success: function(data) {
       if(data.login == true){
-        $('#nav_info').html("<p style='margin:0px;'>"+data.nickname+"님 즐거운 쇼핑되세요<p>")
+        //$('#nav_info').html("<p style='margin:0px;'>"+data.nickname+"님 즐거운 쇼핑되세요<p>")
+        location.reload();
       }
       else{
       }
+    },
+    failure: function() {
+      alert("Unsuccessful");
+    }
+  });
+}
+
+function logOutQuery(){
+  $.ajax({
+    url: '/logout',
+    data: {
+    },
+    type: "POST",
+    success: function(data) {
+      location.reload();
     },
     failure: function() {
       alert("Unsuccessful");
