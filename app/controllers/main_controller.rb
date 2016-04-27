@@ -20,15 +20,18 @@ class MainController < ApplicationController
   def logIn
     @user = User.find_by_user_id(params[:user_id])
     if @user.password == params[:password]
-      @a = 1
-      byebug
-      @a = 2
+      session[:user_id] = @user.id
+      @login = true
+      #render json: => {:login => @login, :nickname => @user.nickname }
+      respond_to do |format|
+        format.json  { render :json => {:login => @login, :nickname => @user.nickname }}
+      end
     else
-      @b = 2
-      byebug
-      @b = 3
+      @login = "false"
+      render json: @login
     end
 
+    #render :nothing => true, :status => 200, :content_type => 'text/html'
   end
 
 end

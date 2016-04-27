@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root 'main#home'
   get '/:page_title' => 'main#home'
   post '/signUp' => 'main#signUp'
-  get '/1/login' => 'main#logIn'
+  post '/login' => 'main#logIn'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

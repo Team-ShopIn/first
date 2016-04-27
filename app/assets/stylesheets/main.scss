@@ -6,6 +6,26 @@
   width: 300px;
 }
 
+#nav_info{
+  height: 300px;
+  text-align: center;
+}
+
+#nav_info #nav_info_login {
+  padding-top: 20px;
+  margin-bottom: 0px;
+}
+
+#nav_info .nav_info_login_center{
+  width: 80%;
+  marign: 0 auto;
+  text-align: left;
+}
+
+#nav_info #nav_info_button{
+  display: inline;
+}
+
 #content{
   padding-left: 300px;
   height: 100%;
