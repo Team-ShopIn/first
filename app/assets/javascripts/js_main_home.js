@@ -1,8 +1,10 @@
 var state = 0; // 1 = main 2 = signup
+var a = 0; // 1 = '홈으로 가기' 2 = '이용 방법'
 
 $('.main.home').ready(function () {
 
   setStateAuto();
+  is_clicked();
   $(".done").hide();
 
   $('#nav_info_login_button').click(function(){
@@ -23,17 +25,29 @@ $('.main.home').ready(function () {
 
   // 메인화면 ( 샵인소개페이지 ) 일 때 실행하는 자바스크립트 코드
   if(state == 1){
-
     $('#nav_info_signup_button').click(function(){
       $(location).attr('href','/sign_up');
     });
   }
 
+  // 회원가입 화면일 때 실행하는 자바스크립트 코드
   else if(state == 2){
     signUpCheck();
     $('#signUp').click(function(){
       signUpQuery();
     });
+  }
+
+  // '홈으로 가기' 를 클릭했을 때 실행하는 자바스크립트 코드
+  if(a == 1){
+    $("#go_ShopIn").css("background-color", "red");
+    $("#go_HowtoUse").css("background-color", "transparent");
+  }
+
+  // '이용 방법' 을 클릭했을 때 실행하는 자바스크립트 코드
+  else if(a == 2){
+    $("#go_ShopIn").css("background-color", "transparent");
+    $("#go_HowtoUse").css("background-color", "red");
   }
 
 });
@@ -188,5 +202,18 @@ function logOutQuery(){
     failure: function() {
       alert("Unsuccessful");
     }
+  });
+}
+
+// 사이드 바 중 어떤 목록을 클릭했는지 확인
+function is_clicked(){
+  // '홈으로 가기'
+  $("#go_ShopIn").click(function(){
+    a = 1;
+  });
+
+  // '이용방법'
+  $("#go_HowtoUse").click(function(){
+    a = 2;
   });
 }
