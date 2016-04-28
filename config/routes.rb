@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root 'main#home'
   get '/:page_title' => 'main#home'
 
-  post '/cart/:id' => 'main#create'
+  post '/cart' => 'main#create'
 
   post '/signUp' => 'main#signUp'
   post '/login' => 'main#logIn'

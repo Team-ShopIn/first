@@ -36,29 +36,22 @@ function parsing_url(){
 
 // 유효한 URL 등록
 function submit_url(url){
-  logged_in();
-
-  // 로그인 상태라면
-  if (log = 1)
-  {
-    var currentId = currentId;
-    $.ajax({
-      url:"/cart/" + currentId,
-      type:'POST',
-      data:{'url' : url},
-      success:function(currentId){
-        sweetAlert ({
-          title: "상품이 등록되었습니다.",
-          text: "해당 상품으로 이동하시겠습니까?",
-          type: "success",
-          showCancelButton: true,
-          cancelButtonText: "다음에 확인",
-          confirmButtonColor: "#cd2026",
-          confirmButtonText: "바로 확인"
-        })
-      }
-    });
-  }
+  $.ajax({
+    url:"/cart",
+    type:'POST',
+    data:{'url' : url},
+    success:function(v){
+      sweetAlert ({
+        title: "상품이 등록되었습니다.",
+        text: "해당 상품으로 이동하시겠습니까?",
+        type: "success",
+        showCancelButton: true,
+        cancelButtonText: "다음에 확인",
+        confirmButtonColor: "#cd2026",
+        confirmButtonText: "바로 확인"
+      })
+    }
+  });
 }
 
 
