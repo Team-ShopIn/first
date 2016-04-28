@@ -1,12 +1,12 @@
 class MainController < ApplicationController
 
   def home
-    @product = Product.new
     @current_user = User.find_by_id(session[:id])
   end
 
   def create
-    @product = Product.create(:url => params[:url])
+    @current_user = User.find_by_id(session[:id])
+    @product = @current_user.products.create(:url => params[:url])
     render :nothing => true, :status => 200, :content_type => 'text/html'
   end
 

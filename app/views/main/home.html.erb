@@ -38,7 +38,11 @@
 
     <li>
         <div id="product_Registration">
+          <% if !@current_user %>
+            <input type="text" id="url_Input" placeholder=" URL 을 입력하세요." class="form-group" disabled="true">
+          <% else %>
           <input type="text" id="url_Input" placeholder=" URL 을 입력하세요." class="form-group">
+          <% end%>
           <button type="button" id="url_Submit" class="btn waves-effect waves-light" href="/"><i class="material-icons">done</i></button>
         </div>
     </li>

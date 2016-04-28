@@ -17,4 +17,8 @@ class UserController < ApplicationController
     end
   end
 
+  def getUserId
+    @current_user = session[:id]
+    render :json => @current_user
+  end
 end
