@@ -13,9 +13,8 @@ Rails.application.routes.draw do
   post '/signUp' => 'main#signUp'
   post '/login' => 'main#logIn'
   post '/logout' => 'main#logOut'
-  post '/howtouse' => 'main#home'
 
-  post '/getUserId' => 'user#getUserId'
+  post '/getCurrentUserId' => 'user#getCurrentUserId'
 
 
   # Example of regular route:

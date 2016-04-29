@@ -60,15 +60,11 @@ function logged_in() {
   var log = 0;  // 0 = no_login , 1 = login
   // 현재 사용자의 ID값을 받아옴
   $.ajax({
-    url:"/getUserId",
+    url:"/getCurrentUserId",
     type:'POST',
     datatype: 'json',
     success:function(currentId){
-      // 사용자의 ID값이 존재할 경우
-      if (currentId != null) {
-        log = 1;
-        return currentId;
-      }
+      return currentId;
     }
   });
 }
