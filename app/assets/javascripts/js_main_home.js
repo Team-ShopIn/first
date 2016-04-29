@@ -40,14 +40,14 @@ $('.main.home').ready(function () {
 
   // '홈으로 가기' 를 클릭했을 때 실행하는 자바스크립트 코드
   if(a == 1){
-    $("#go_ShopIn").css("background-color", "red");
-    $("#go_HowtoUse").css("background-color", "transparent");
+    //$("#go_ShopIn").css("background-color", "red");
+    //$("#go_HowtoUse").css("background-color", "transparent");
   }
 
   // '이용 방법' 을 클릭했을 때 실행하는 자바스크립트 코드
   else if(a == 2){
-    $("#go_ShopIn").css("background-color", "transparent");
-    $("#go_HowtoUse").css("background-color", "red");
+    //$("#go_ShopIn").css("background-color", "transparent");
+    //$("#go_HowtoUse").css("background-color", "red");
   }
 
 });

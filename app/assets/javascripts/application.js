@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require jquery.turbolinks
 //= require jquery-readyselector
+//= require pace/pace
 //= require_tree .

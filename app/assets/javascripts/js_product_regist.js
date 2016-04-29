@@ -24,7 +24,9 @@ function parsing_url(){
 
   // URL이 유효할 경우
   if(urltest){
-    submit_url(url);
+    Pace.restart();
+    analyze(url);
+    //submit_url(url);
   }
 
   //URL이 유효하지 않을 경우
@@ -33,13 +35,28 @@ function parsing_url(){
   }
 }
 
+function analyze(url){
+  $.ajax({
+    type: 'POST',
+    crossDomain: true,
+    dataType: 'json',
+    url: '/findParsing?url=' + encodeURIComponent(url),
+    success: function(data,status,xhr){
+      if(data.message == "success"){
+        submit_success(data.title,data.img,data.price,data.url);
+      }
+      else{
+        submit_fail(url);
+      }
+    }
+  });
+}
 
-// 유효한 URL 등록
-function submit_url(url){
+function submit_success(title, image, price, url){
   $.ajax({
     url:"/cart",
     type:'POST',
-    data:{'url' : url},
+    data:{'url' : url, 'title' : title, 'image' : image, 'price' : price},
     success:function(v){
       sweetAlert ({
         title: "상품이 등록되었습니다.",
@@ -49,6 +66,24 @@ function submit_url(url){
         cancelButtonText: "다음에 확인",
         confirmButtonColor: "#cd2026",
         confirmButtonText: "바로 확인"
+      })
+    }
+  });
+}
+
+function submit_fail(url){
+  $.ajax({
+    url:"/cart",
+    type:'POST',
+    data:{'url' : url},
+    success:function(v){
+      swal({
+        title: "상품을 분석중입니다.",
+        text: "금방 분석해드리겠습니다",
+        type: "warning",
+        showCancelButton: false,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "기다리기",
       })
     }
   });

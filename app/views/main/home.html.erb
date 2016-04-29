@@ -47,7 +47,7 @@
         </div>
     </li>
     <li><a href="/" id="go_ShopIn">Shop In</a></li>
-    <li><a href="/howtouse" id="go_HowtoUse">How to Use</a></li>
+    <li><a href="/how" id="go_How">How to Use</a></li>
     <li><a href="https://chrome.google.com/webstore/detail/shop-in/inkgpdfkjhckpjhimallbplbnjhdnmdd?hl=ko" target="_blank" id="go_ChromeService">Chrome Extend Program</a></li>
   </ul>
 
@@ -59,8 +59,8 @@
       <%= render :layout => 'home_shopin', :locals => {:title => 'some title'} do %><% end %>
     <% elsif params[:page_title] == "sign_up" %>
       <%= render :layout => 'home_signup', :locals => {:title => 'some title'} do %><% end %>
-    <% elsif params[:page_title] == "howtouse" %>
-      <%= render :layout => 'home_howtouse', :locals => {:title => 'some title'} do %><% end %>
+    <% elsif params[:page_title] == "how" %>
+      <%= render :layout => 'home_how', :locals => {:title => 'some title'} do %><% end %>
     <% end %>
 
   </div>
