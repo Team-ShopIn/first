@@ -12,5 +12,6 @@
  *
  *= require_self
  *= require sweet-alert
- *= require_tree . 
+ *= require pace/red/pace-theme-loading-bar
+ *= require_tree .
  */

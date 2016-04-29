@@ -30,6 +30,8 @@ gem 'bcrypt'
 # Pretty alert
 gem 'sweetalert-rails'
 
+gem 'pace-rails'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
