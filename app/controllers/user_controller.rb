@@ -8,13 +8,41 @@ class UserController < ApplicationController
     @user.save!
   end
 
-  def login
+  def signUp
+  end
+
+  def logIn
     @user = User.find_by_user_id(params[:user_id])
     if @user.password == params[:password]
-      #login complete
+      session[:id] = @user.id
+      @login = true
+      respond_to do |format|
+        format.json  { render :json => {:login => @login, :nickname => @user.nickname }}
+      end
     else
-      #back
+      @login = "false"
+      render json: @login
     end
+
+    #render :nothing => true, :status => 200, :content_type => 'text/html'
+  end
+
+  def logOut
+    session[:id] = nil
+    render :nothing => true, :status => 200, :content_type => 'text/html'
+  end
+
+  def signUpQuery
+    @user = User.new
+    @user.user_id = params[:user_id]
+    @user.password = params[:password]
+    @user.name = params[:name]
+    @user.email = params[:email]
+    @user.nickname = params[:nickname]
+
+    @user.save
+
+    render :nothing => true, :status => 200, :content_type => 'text/html'
   end
 
   def getCurrentUserId
