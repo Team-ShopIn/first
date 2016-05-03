@@ -10,4 +10,15 @@ class ProductController < ApplicationController
     render :nothing => true, :status => 200, :content_type => 'text/html'
   end
 
+  def cart
+    @user = User.find_by_id(session[:id])
+
+    if @user != nil
+      @products = @user.products.all
+    else
+      redirect_to "/"
+    end
+
+  end
+
 end

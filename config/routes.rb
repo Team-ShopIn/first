@@ -6,16 +6,16 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   root 'main#home'
-  get '/:page_title' => 'main#home'
 
-  post '/cart' => 'product#create'
+  get '/signUp' => 'user#signUp'
+  get '/how' => 'main#how'
+  get '/cart' => 'product#cart'
 
-  post '/signUp' => 'main#signUp'
-  post '/login' => 'main#logIn'
-  post '/logout' => 'main#logOut'
-
+  post '/productQuery' => 'product#create'
+  post '/signUpQuery' => 'user#signUpQuery'
+  post '/login' => 'user#logIn'
+  post '/logout' => 'user#logOut'
   post '/getCurrentUserId' => 'user#getCurrentUserId'
-
   post '/findParsing' => 'parsing#findParsing'
 
   # Example of regular route:

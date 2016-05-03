@@ -1,69 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-</head>
-<body class="main home">
-
-  <ul id="navigation" class="side-nav fixed">
-    <div id="nav_info">
-
-      <div class="row" id="nav_info_login">
-        <% if !@current_user %>
-          <form class="col s12"/>
-          <div class="row nav_info_login_center" style="margin-bottom : 0px;">
-            <div class="input-field col s12">
-              <input id="nav_info_id" type="text" class="validate">
-              <label for="nav_info_id">ID</label>
-            </div>
-          </div>
-          <div class="row nav_info_login_center">
-            <div class="input-field col s12">
-              <input id="nav_info_pw" type="password" class="validate">
-              <label for="nav_info_pw">PASSWORD</label>
-            </div>
-          </div>
-        <% else %>
-          <p style="margin:0px; font-size:20px;"><b><%= @current_user.nickname %></b>님 즐거운 쇼핑되세요<p>
-        <% end %>
-      </div>
-      <div id="nav_info_button">
-        <% if !@current_user %>
-          <button class="waves-effect waves-light btn nav_info_signup_button" type="button" id="nav_info_login_button">로그인</button>
-        <% else %>
-          <button class="waves-effect waves-light btn nav_info_signup_button" type="button" id="nav_info_login_button">로그아웃</button>
-        <% end %>
-        <button class="waves-effect waves-light btn nav_info_signup_button" type="button" id="nav_info_signup_button">회원가입</button>
-      </div>
-    </div>
-
-    <li>
-        <div id="product_Registration">
-          <% if !@current_user %>
-            <input type="text" id="url_Input" placeholder=" URL 을 입력하세요." class="form-group" disabled="true">
-          <% else %>
-          <input type="text" id="url_Input" placeholder=" URL 을 입력하세요." class="form-group">
-          <% end%>
-          <button type="button" id="url_Submit" class="btn waves-effect waves-light" href="/"><i class="material-icons">done</i></button>
-        </div>
-    </li>
-    <li><a href="/" id="go_ShopIn">Shop In</a></li>
-    <li><a href="/how" id="go_How">How to Use</a></li>
-    <li><a href="https://chrome.google.com/webstore/detail/shop-in/inkgpdfkjhckpjhimallbplbnjhdnmdd?hl=ko" target="_blank" id="go_ChromeService">Chrome Extend Program</a></li>
-  </ul>
-
-  <a href="#" data-activates="navigation" class="button-collapse" style="position:fixed;"><i class="material-icons">menu</i></a>
-
-  <div id="content">
-
-    <% if params[:page_title] == nil %>
-      <%= render :layout => 'home_shopin', :locals => {:title => 'some title'} do %><% end %>
-    <% elsif params[:page_title] == "sign_up" %>
-      <%= render :layout => 'home_signup', :locals => {:title => 'some title'} do %><% end %>
-    <% elsif params[:page_title] == "how" %>
-      <%= render :layout => 'home_how', :locals => {:title => 'some title'} do %><% end %>
-    <% end %>
-
-  </div>
-
-</body>
+  <head>
+  </head>
+  <body class="main home">
+    <a href="#" data-activates="navigation" class="button-collapse" style="position:fixed;"><i class="material-icons">menu</i></a>
+  </body>
 </html>
