@@ -2,9 +2,16 @@
 <html>
   <head>
   </head>
-  <body>
-    <% @products.each do |p| %>
-      <p> <%= p.url %> </p>
-    <% end %>
+  <body class="product cart">
+    <div id="cart_products_info">
+        <% @products.each do |p| %>
+          <div id="cart_product">
+            <div id="cart_products_info_img"> <%= link_to image_tag(p.img), p.url, :target => "_blank" %> </div>
+            <div id="cart_products_info_name"> <%= p.name %> </div>
+            <div id="cart_products_info_price"> <%= p.price %> </div>
+            <div id="cart_products_info_time"> <%= p.created_at %> </div>
+          </div>
+        <% end %>
+    </div>
   </body>
 </html>
