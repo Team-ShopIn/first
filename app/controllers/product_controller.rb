@@ -2,7 +2,7 @@ class ProductController < ApplicationController
 
   def create
     @current_user = User.find_by_id(session[:id])
-    if params[:name] != nil
+    if params[:title] != nil
       @product = @current_user.products.create(:url => params[:url],:name => params[:title], :price => params[:price],:img => params[:image])
     else
       @product = @current_user.products.create(:url => params[:url])
