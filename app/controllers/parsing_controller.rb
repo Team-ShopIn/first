@@ -1,5 +1,6 @@
 class ParsingController < ApplicationController
   require 'open-uri'
+  skip_before_filter  :verify_authenticity_token
 
   @@b_in = false
   def findParsing()
