@@ -13,7 +13,7 @@ class UserController < ApplicationController
 
   def logIn
     @user = User.find_by_user_id(params[:user_id])
-    if @user.password == params[:password]
+    if @user != nil && @user.password == params[:password]
       session[:id] = @user.id
       @login = true
       respond_to do |format|
