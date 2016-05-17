@@ -3,6 +3,13 @@
   <head>
   </head>
   <body class="product cart">
+
+    <div id="cart_products_sorting">
+      <div id="cart_products_sorting_time"> <button> 등록순 </button> </div>
+      <div id="cart_products_sorting_price_expensive"> <button> 높은 가격순 </button> </div>
+      <div id="cart_products_sorting_price_cheap"> <button> 낮은 가격순 </button> </div>
+    </div>
+
     <div id="cart_products_info">
         <% @products.each do |p| %>
           <div id="cart_product">
