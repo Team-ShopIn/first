@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/signUp' => 'user#signUp'
   get '/how' => 'main#how'
   get '/cart' => 'product#cart'
+  get '/sort' => 'product#sort'
 
   post '/productQuery' => 'product#create'
   post '/signUpQuery' => 'user#signUpQuery'
