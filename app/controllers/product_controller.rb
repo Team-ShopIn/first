@@ -11,10 +11,10 @@ class ProductController < ApplicationController
   end
 
   def cart
-    @user = User.find_by_id(session[:id])
+    @current_user = User.find_by_id(session[:id])
 
-    if @user != nil
-      @products = @user.products.all.order("created_at DESC")
+    if @current_user != nil
+      @products = @current_user.products.all.order("created_at DESC")
       if params[:clicked] == "ok"
         render :json => @products
       end
@@ -24,13 +24,13 @@ class ProductController < ApplicationController
   end
 
   def sort
-    @user = User.find_by_id(session[:id])
+    @current_user = User.find_by_id(session[:id])
 
-    if @user != nil
+    if @current_user != nil
       if params[:howmuch] == "low"
-        @products_price = @user.products.all.sort_by(&:price)
+        @products_price = @current_user.products.all.sort_by(&:price)
       else
-        @products_price = @user.products.all.sort_by(&:price).reverse
+        @products_price = @current_user.products.all.sort_by(&:price).reverse
       end
       render :json => @products_price
     else

@@ -1,21 +1,31 @@
 $('.side-nav.fixed').ready(function () {
 
+  // 로그인 / 로그아웃
   $('#nav_info_login_button').click(function(){
     if($('#nav_info_login_button').text() == "로그인")
       logInQuery();
     else{
       logOutQuery();
-      alert("까꿍");
     }
   });
 
-  // Submit 버튼 클릭했을 경우
+  // 로그인 시 'Enter' 키 눌렀을 경우
+  $('#nav_info_pw').keydown(function(e){
+    if(e.keyCode == 13){
+      if($('#nav_info_login_button').text() == "로그인") {
+        logInQuery();
+      }
+    }
+    else{}
+  });
+
+  // url 등록 시 Submit 버튼 클릭했을 경우
   $("#url_Submit").click(function(){
     parsing_url();
     $("#url_Input").val('');
   });
 
-  // 'Enter' 키 눌렀을 경우
+  // url 등록 시 'Enter' 키 눌렀을 경우
   $("#url_Input").keydown(function(e){
     if(e.keyCode == 13){
       parsing_url();
@@ -24,9 +34,29 @@ $('.side-nav.fixed').ready(function () {
     else{}
   });
 
+  // 'Add Category' 버튼 클릭했을 경우 모달창 띄움
+  $("#add_Category").click(function(){
+    $('#category_Modal').openModal();
+  });
+
+  // 카테고리 이름 입력 후 Submit 버튼 클릭했을 경우
+  $("#category_Submit").click(function(){
+    add_category();
+    $('#category_Modal').closeModal();
+    $("#category_Name_Input").val('');
+  });
+
+  // 카테고리 삭제 버튼 클릭했을 경우
+  $('.delete_Specified_Category').click(function(){
+    var id = [];
+    id = $(this).attr('class').split(" ");
+    var a = id[1];
+
+    delete_category(a);
+  });
 });
 
-
+// 로그인
 function logInQuery(){
   var user_id = $('#nav_info_id').val();
   var password = $('#nav_info_pw').val();
@@ -53,6 +83,7 @@ function logInQuery(){
   });
 }
 
+// 로그아웃
 function logOutQuery(){
   $.ajax({
     url: '/logout',
@@ -87,6 +118,7 @@ function parsing_url(){
   }
 }
 
+// url 분석 후 상품 정보 저장 (상품 이름, 이미지, 가격, 판매 사이트 url)
 function analyze(url){
   $.ajax({
     type: 'POST',
@@ -104,6 +136,7 @@ function analyze(url){
   });
 }
 
+// 파싱된 쇼핑몰 등록했을 경우
 function submit_success(title, image, price, url){
   $.ajax({
     url:"/productQuery",
@@ -123,6 +156,7 @@ function submit_success(title, image, price, url){
   });
 }
 
+// 파싱되지 않은 쇼핑몰 등록했을 경우
 function submit_fail(url){
   $.ajax({
     url:"/productQuery",
@@ -137,6 +171,65 @@ function submit_fail(url){
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "기다리기",
       })
+    }
+  });
+}
+
+// 카테고리 추가
+function add_category(){
+  var category_name = $('#category_Name_Input').val();
+
+  $.ajax({
+    url: '/addCategory',
+    data: { name: category_name },
+    type: "POST",
+    success: function(data) {
+      console.log(data.name);
+      $('#category_List').append('<li><a class="go_Specified_Category' + data.id + '" id="go_Specified_Category">' + data.name + '<button type="button" id="category_Delete" class="delete_Specified_Category ' + data.id + '"><i class="material-icons">delete</i></button></a></li>');
+    }
+  });
+}
+
+// 카테고리 삭제
+function delete_category(a){
+  sweetAlert ({
+    title: "정말 삭제하시겠습니까?",
+    type: "warning",
+    customClass: a,
+    confirmButtonColor: "#cd2026",
+    confirmButtonText: "예, 삭제하겠습니다",
+    showCancelButton: true,
+    cancelButtonText: "아니오, 삭제하지 않습니다",
+    closeOnConfirm: false,
+    closeOnCancel: false
+  },
+
+  function(isConfirm) {
+    if(isConfirm) {
+      var id = $("#category_List").find('.go_Specified_Category' + a);
+      $("#category_List").find('.go_Specified_Category' + a).remove();
+
+      sweetAlert({
+        title: "삭제되었습니다.",
+        type: "success",
+        timer: 1200,
+        showConfirmButton: false
+      });
+
+      $.ajax({
+        url:"/destroyCategory",
+        data: { id: a },
+        type:"GET",
+        success:function(data) {}
+      });
+    }
+    else {
+      sweetAlert({
+        title: "삭제되지 않았습니다.",
+        type: "error",
+        timer: 1200,
+        showConfirmButton: false
+      });
     }
   });
 }
