@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require sweet-alert
+//= require sweetalert
 //= require turbolinks
 //= require jquery.turbolinks
 //= require jquery-readyselector

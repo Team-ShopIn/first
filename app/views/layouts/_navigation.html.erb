@@ -43,5 +43,23 @@
   <li><a href="/" id="go_ShopIn">Shop In</a></li>
   <li><a href="/how" id="go_How">How to Use</a></li>
   <li><a href="https://chrome.google.com/webstore/detail/shop-in/inkgpdfkjhckpjhimallbplbnjhdnmdd?hl=ko" target="_blank" id="go_ChromeService">Chrome Extend Program</a></li>
-  <li><a href="/cart" id="go_Cart_All">Cart</a></li>
+  <li><a href="/cart" id="go_Cart_All">상품 전체보기</a></li>
+  <% if category %>
+    <div id="category_List">
+      <% category.each do |c| %>
+        <li><a class="go_Specified_Category<%= c.id %>" id="go_Specified_Category"> <%= c.name %> <button type="button" id="category_Delete" class="delete_Specified_Category <%= c.id %>"><i class="material-icons">delete</i></button></a></li>
+      <% end %>
+    </div>
+  <% end %>
+  <li><a id="add_Category" class="waves-effect waves-light btn modal-trigger" >Add Category</a></li>
 </ul>
+
+
+<!-- 카테고리 추가 모달 -->
+<div id="category_Modal" class="modal">
+  <div class="modal-content">
+    <h4>카테고리 추가</h4>
+    <input type="text" id="category_Name_Input" placeholder="카테고리 이름을 지정해주세요.">
+    <button type="button" id="category_Submit" class="btn waves-effect waves-light"href="/"><i class="material-icons">done</i></button>
+  </div>
+</div>
