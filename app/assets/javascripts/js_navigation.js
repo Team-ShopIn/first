@@ -45,15 +45,6 @@ $('.side-nav.fixed').ready(function () {
     $('#category_Modal').closeModal();
     $("#category_Name_Input").val('');
   });
-
-  // 카테고리 삭제 버튼 클릭했을 경우
-  $('.delete_Specified_Category').click(function(){
-    var id = [];
-    id = $(this).attr('class').split(" ");
-    var a = id[1];
-
-    delete_category(a);
-  });
 });
 
 // 로그인
@@ -184,52 +175,7 @@ function add_category(){
     data: { name: category_name },
     type: "POST",
     success: function(data) {
-      console.log(data.name);
-      $('#category_List').append('<li><a class="go_Specified_Category' + data.id + '" id="go_Specified_Category">' + data.name + '<button type="button" id="category_Delete" class="delete_Specified_Category ' + data.id + '"><i class="material-icons">delete</i></button></a></li>');
-    }
-  });
-}
-
-// 카테고리 삭제
-function delete_category(a){
-  sweetAlert ({
-    title: "정말 삭제하시겠습니까?",
-    type: "warning",
-    customClass: a,
-    confirmButtonColor: "#cd2026",
-    confirmButtonText: "예, 삭제하겠습니다",
-    showCancelButton: true,
-    cancelButtonText: "아니오, 삭제하지 않습니다",
-    closeOnConfirm: false,
-    closeOnCancel: false
-  },
-
-  function(isConfirm) {
-    if(isConfirm) {
-      var id = $("#category_List").find('.go_Specified_Category' + a);
-      $("#category_List").find('.go_Specified_Category' + a).remove();
-
-      sweetAlert({
-        title: "삭제되었습니다.",
-        type: "success",
-        timer: 1200,
-        showConfirmButton: false
-      });
-
-      $.ajax({
-        url:"/destroyCategory",
-        data: { id: a },
-        type:"GET",
-        success:function(data) {}
-      });
-    }
-    else {
-      sweetAlert({
-        title: "삭제되지 않았습니다.",
-        type: "error",
-        timer: 1200,
-        showConfirmButton: false
-      });
+      $('#category_List').append('<li><a href="/category/' + data.id + '" class="go_Specified_Category' + data.id + '" id="go_Specified_Category">' + data.name + '</a></li>');
     }
   });
 }

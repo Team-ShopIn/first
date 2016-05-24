@@ -47,11 +47,11 @@
   <% if category %>
     <div id="category_List">
       <% category.each do |c| %>
-        <li><a class="go_Specified_Category<%= c.id %>" id="go_Specified_Category"> <%= c.name %> <button type="button" id="category_Delete" class="delete_Specified_Category <%= c.id %>"><i class="material-icons">delete</i></button></a></li>
+        <li><a href="/category/<%= c.id %>" class="go_Specified_Category <%= c.id %>" id="go_Specified_Category"> <%= c.name %> </a></li>
       <% end %>
     </div>
   <% end %>
-  <li><a id="add_Category" class="waves-effect waves-light btn modal-trigger" >Add Category</a></li>
+  <li><a id="add_Category" class="waves-effect waves-light btn modal-trigger">Add Category</a></li>
 </ul>
 
 

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/cart' => 'product#cart'
   get '/sort' => 'product#sort'
   get '/destroyCategory' => 'category#destroy'
+  get '/category/:id' => 'category#show'
 
   post '/productQuery' => 'product#create'
   post '/signUpQuery' => 'user#signUpQuery'
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
   post '/getCurrentUserId' => 'user#getCurrentUserId'
   post '/findParsing' => 'parsing#findParsing'
   post '/addCategory' => 'category#create'
+  post 'sortInCategory' => 'product_id#create'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
