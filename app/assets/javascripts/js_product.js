@@ -13,7 +13,34 @@ $('.product.cart').ready(function () {
   $('#cart_products_sorting_price_cheap').click(function(){
     sort_price("low");
   });
+
+  // 카테고리 삭제 버튼 클릭했을 경우
+  $('.delete_Specified_Category').click(function(){
+    var id = [];
+    id = $(this).attr('class').split(" ");
+    var a = id[1];
+
+    delete_category(a);
+  });
+
+  // '카테고리에 담기' 버튼 클릭했을 경우
+  $('.cart_products_category').click(function(){
+    var product_id = [];
+    product_id = $(this).attr('class').split(" ");
+    var p_id = product_id[1];
+    $('#select_category_Modal').openModal();
+
+    // 상품을 담을 카테고리 선택 후
+    $('.select_Category').click(function(){
+      var category_id = [];
+      category_id = $(this).attr('class').split(" ");
+      var c_id = category_id[1];
+
+      cart_in_category(p_id, c_id);
+    });
+  });
 });
+
 
 // 로그인 상태인지 확인
 function logged_in() {
@@ -44,6 +71,7 @@ function sort_time(time) {
         $('#cart_products_info').append($item);
         if(product[i].img != null)
           $item.append('<div id="cart_products_info_img"> <img src="' + product[i].img + '"> </div>');
+          $item.append('<div id="cart_products_category" class="cart_products_category ' + product[i].id + '"> <button> 카테고리에 담기 </button> </div>');
           $item.append('<div id="cart_products_info_name">' + product[i].name + '</div>');
           $item.append('<div id="cart_products_info_price">' + product[i].price + '</div>');
           $item.append('<div id="cart_products_info_time">' + product[i].created_at + '</div>');
@@ -68,11 +96,73 @@ function sort_price(high_low) {
         $('#cart_products_info').append($item);
         if(product[i].img != null)
           $item.append('<div id="cart_products_info_img"> <img src="' + product[i].img + '"> </div>');
+          $item.append('<div id="cart_products_category" class="cart_products_category ' + product[i].id + '"> <button> 카테고리에 담기 </button> </div>');
           $item.append('<div id="cart_products_info_name">' + product[i].name + '</div>');
           $item.append('<div id="cart_products_info_price">' + product[i].price + '</div>');
           $item.append('<div id="cart_products_info_time">' + product[i].created_at + '</div>');
           $('#cart_products_info').append('</div>');
       }
+    }
+  });
+}
+
+// 선택한 카테고리에 해당 상품 담기
+function cart_in_category(p_id, c_id) {
+  $.ajax({
+    url:"/sortInCategory",
+    data: {
+      p_Id: p_id,
+      c_Id: c_id
+    },
+    type:"POST",
+    success:function(data) {
+      $('#select_category_Modal').closeModal();
+    }
+  });
+}
+
+// 카테고리 삭제
+function delete_category(a){
+  sweetAlert ({
+    title: "정말 삭제하시겠습니까?",
+    type: "warning",
+    customClass: a,
+    confirmButtonColor: "#cd2026",
+    confirmButtonText: "예, 삭제하겠습니다",
+    showCancelButton: true,
+    cancelButtonText: "아니오, 삭제하지 않습니다",
+    closeOnConfirm: false,
+    closeOnCancel: false
+  },
+
+  function(isConfirm) {
+    if(isConfirm) {
+      var id = $("#category_List").find('.go_Specified_Category' + a);
+      $("#category_List").find('.go_Specified_Category' + a).remove();
+
+      sweetAlert({
+        title: "삭제되었습니다.",
+        type: "success",
+        timer: 1200,
+        showConfirmButton: false
+      });
+
+      $.ajax({
+        url:"/destroyCategory",
+        data: { id: a },
+        type:"GET",
+        success:function(data) {
+          window.location = "/cart";
+        }
+      });
+    }
+    else {
+      sweetAlert({
+        title: "삭제되지 않았습니다.",
+        type: "error",
+        timer: 1200,
+        showConfirmButton: false
+      });
     }
   });
 }

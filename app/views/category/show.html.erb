@@ -10,16 +10,18 @@
       <div id="cart_products_sorting_price_cheap"> <button> 낮은 가격순 </button> </div>
     </div>
 
+    <button type="button" id="category_Delete" class="delete_Specified_Category <%= @current_category.id %>"><i class="material-icons">delete</i></button>
+
     <div id="cart_products_info">
-        <% @products.each do |p| %>
-          <div id="cart_product" class="cart_product">
-            <div id="cart_products_info_img"> <%= link_to image_tag(p.img), p.url, :target => "_blank" %> </div>
-            <div id="cart_products_category" class="cart_products_category <%= p.id %>"> <button> 카테고리에 담기 </button> </div>
-            <div id="cart_products_info_name"> <%= p.name %> </div>
-            <div id="cart_products_info_price"> <%= p.price %> </div>
-            <div id="cart_products_info_time"> <%= p.created_at %> </div>
-          </div>
-        <% end %>
+      <% @product_in_category.each do |p| %>
+        <div id="cart_product" class="cart_product">
+          <div id="cart_products_info_img"> <%= link_to image_tag(p.img), p.url, :target => "_blank" %> </div>
+          <div id="cart_products_category" class="cart_products_category <%= p.id %>"> <button> 카테고리에 담기 </button> </div>
+          <div id="cart_products_info_name"> <%= p.name %> </div>
+          <div id="cart_products_info_price"> <%= p.price %> </div>
+          <div id="cart_products_info_time"> <%= p.created_at %> </div>
+        </div>
+      <% end %>
     </div>
   </body>
 </html>

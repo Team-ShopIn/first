@@ -1,0 +1,2 @@
+module ProductIdHelper
+end
