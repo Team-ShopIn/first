@@ -39,7 +39,69 @@ $('.product.cart').ready(function () {
       cart_in_category(p_id, c_id);
     });
   });
+
+  // 상품 수정 버튼 클릭했을 경우
+  $('.cart_products_edit').click(function(){
+    var product_id = [];
+    product_id = $(this).attr('class').split(" ");
+    var p_id = product_id[1];
+
+    $(".cart_products_info_name" + p_id).hide();
+    $(".div_products_input_edit_name" + p_id).show();
+  });
+
+  // 상품 삭제 버튼 클릭했을 경우
+  $('.cart_products_delete').click(function(){
+    var product_id = [];
+    product_id = $(this).attr('class').split(" ");
+    var p_id = product_id[1];
+
+    delete_product(p_id);
+  });
 });
+
+function delete_product(id) {
+  var product_id = id;
+
+  sweetAlert ({
+      title: "정말 삭제하시겠습니까?",
+      type: "warning",
+      customClass: a,
+      confirmButtonColor: "#cd2026",
+      confirmButtonText: "예, 삭제하겠습니다",
+      showCancelButton: true,
+      cancelButtonText: "아니오, 삭제하지 않습니다",
+      closeOnConfirm: false,
+      closeOnCancel: false
+  },
+
+  function(isConfirm) {
+      if(isConfirm) {
+        $(".cart_product" + product_id).remove();
+          sweetAlert({
+              title: "삭제되었습니다.",
+              type: "success",
+              timer: 1200,
+              showConfirmButton: false
+          });
+
+          $.ajax({
+              url:"/cart/" + product_id,
+              type:"DELETE",
+              success:function(v) {
+              }
+          });
+      }
+      else {
+          sweetAlert({
+              title: "삭제되지 않았습니다.",
+              type: "error",
+              timer: 1200,
+              showConfirmButton: false
+          });
+      }
+  });
+}
 
 
 // 로그인 상태인지 확인
@@ -148,9 +210,9 @@ function delete_category(a){
       });
 
       $.ajax({
-        url:"/destroyCategory",
+        url:"/category/" + a,
         data: { id: a },
-        type:"GET",
+        type:"DELETE",
         success:function(data) {
           window.location = "/cart";
         }
@@ -164,5 +226,25 @@ function delete_category(a){
         showConfirmButton: false
       });
     }
+  });
+}
+
+// 상품 정보 수정
+function edit_product_info(product_id) {
+  var edited_name = $(".div_products_input_edit_name" + product_id).children().val();
+
+  $(".cart_products_info_name" + product_id).html(edited_name);
+  $(".cart_products_info_name" + product_id).show();
+  $(".div_products_input_edit_name" + product_id).hide();
+
+  $.ajax({
+      url:"/cart/" + product_id,
+      data: {
+              'id': product_id,
+              'name': edited_name
+            },
+      type:"PUT",
+      success:function(data) {
+      }
   });
 }

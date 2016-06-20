@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   get '/how' => 'main#how'
   get '/cart' => 'product#cart'
   get '/sort' => 'product#sort'
-  get '/destroyCategory' => 'category#destroy'
   get '/category/:id' => 'category#show'
 
   post '/productQuery' => 'product#create'
@@ -22,6 +21,11 @@ Rails.application.routes.draw do
   post '/findParsing' => 'parsing#findParsing'
   post '/addCategory' => 'category#create'
   post 'sortInCategory' => 'product_id#create'
+
+  put '/cart/:id' => 'product#edit'
+
+  delete '/category/:id' => 'category#destroy'
+  delete '/cart/:id' => 'product#destroy'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

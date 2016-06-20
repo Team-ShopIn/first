@@ -12,10 +12,19 @@
 
     <div id="cart_products_info">
         <% @products.each do |p| %>
-          <div id="cart_product" class="cart_product">
+          <div id="cart_product" class="cart_product<%= p.id %>">
             <div id="cart_products_info_img"> <%= link_to image_tag(p.img), p.url, :target => "_blank" %> </div>
-            <div id="cart_products_category" class="cart_products_category <%= p.id %>"> <button> 카테고리에 담기 </button> </div>
-            <div id="cart_products_info_name"> <%= p.name %> </div>
+            <span id="cart_products_category" class="cart_products_category <%= p.id %>"> <button> 카테고리 </button> </span>
+            <span id="cart_products_edit" class="cart_products_edit <%= p.id %>"> <button> 수정 </button> </span>
+
+            <span id="div_products_input_edit_name" class="div_products_input_edit_name<%= p.id %>">
+                <input type="text" name="name" id="edited_name" class="form-control" value="<%= p.name %>">
+                <button onclick="edit_product_info(<%= p.id %>);">완료</button>
+            </span>
+
+            <span id="cart_products_delete" class="cart_products_delete <%= p.id %>"> <button> 삭제 </button> </span>
+
+            <div id="cart_products_info_name" class="cart_products_info_name<%= p.id %>"> <%= p.name %> </div>
             <div id="cart_products_info_price"> <%= p.price %> </div>
             <div id="cart_products_info_time"> <%= p.created_at %> </div>
           </div>
