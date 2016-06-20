@@ -38,4 +38,38 @@ class ProductController < ApplicationController
     end
   end
 
+  def edit
+    @current_user = User.find_by_id(session[:id])
+
+    if @current_user != nil
+      @products = @current_user.products.find(params[:id])
+
+      if @products != nil
+        @products.name = params[:name]
+        @products.save
+        render :json => @products
+      end
+    end
+  end
+
+  def destroy
+    @current_user = User.find_by_id(session[:id])
+    @all_categories_id = Array.new
+
+    if params[:id] != nil
+      @delete_product = @current_user.products.find(params[:id])
+      @delete_product.destroy
+      render :json => @delete_product
+
+      @all_categories_id = @current_user.categories.all.select('id')
+
+      @all_categories_id.each do |i|
+        @current_user.categories.find(i.id).product_ids.where(:p_Id => params[:id]).destroy_all
+      end
+
+    else
+      redirect_to "/"
+    end
+  end
+
 end
